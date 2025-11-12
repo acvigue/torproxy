@@ -1,8 +1,4 @@
-FROM alpine:3.22
-
-LABEL maintainer="Peter Dave Hello <hsu@peterdavehello.org>"
-LABEL name="tor-socks-proxy"
-LABEL version="latest"
+FROM alpine:latest
 
 RUN echo '@edge https://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories && \
     echo '@edge https://dl-cdn.alpinelinux.org/alpine/edge/testing'   >> /etc/apk/repositories && \
@@ -13,8 +9,8 @@ RUN echo '@edge https://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/ap
     tor --version
 COPY --chown=tor:root torrc /etc/tor/
 
-HEALTHCHECK --timeout=10s --start-period=60s \
-    CMD curl --fail --socks5-hostname localhost:9150 -I -L 'https://www.facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion/' || exit 1
+HEALTHCHECK --timeout=10s --start-period=20s \
+    CMD curl --fail -x socks5://localhost:9150 -I -L 'https://www.facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion/' || exit 1
 
 USER tor
 EXPOSE 8853/udp 9150/tcp
