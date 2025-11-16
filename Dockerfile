@@ -16,7 +16,7 @@ RUN mkdir -p /data/hidden_services && \
 COPY --chown=tor:tor torrc /data/torrc
 
 HEALTHCHECK --timeout=10s --start-period=20s \
-    CMD curl --fail -x socks5://localhost:9150 -I -L 'https://www.facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion/' || exit 1
+    CMD curl --fail -x socks5://localhost:9150 https://ifconfig.me || exit 1
 
 USER tor
 EXPOSE 8853/udp 9150/tcp
