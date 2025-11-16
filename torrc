@@ -2,4 +2,4 @@ HardwareAccel 1
 Log notice stdout
 DNSPort 0.0.0.0:8853
 SocksPort 0.0.0.0:9150
-DataDirectory /var/lib/tor
+DataDirectory /data/hidden_services
